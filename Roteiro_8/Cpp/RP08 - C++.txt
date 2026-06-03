@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+
+class Produto {
+private:
+    std::string nome;
+    int estoque_real;
+    int estoque_ideal;
+
+public:
+    Produto(std::string n, int real, int ideal) {
+        nome = n;
+        estoque_real = real;
+        estoque_ideal = ideal;
+    }
+
+    bool verificar_necessidade_compra() {
+        double limite_minimo = estoque_ideal * 0.20;
+        return estoque_real < limite_minimo;
+    }
+
+       void registrar_saida(int quantidade) {
+        if (quantidade <= estoque_real) {
+            estoque_real = estoque_real - quantidade;
+            std::cout << "Venda realizada, novo saldo de " << nome << ": " << estoque_real << std::endl;
+        } else {
+                       std::cout << "ERRO: Operação Bloqueada para " << nome << "!" << std::endl;
+            std::cout << "Risco de Estoque Negativo. Saldo atual: " << estoque_real << std::endl;
+        }
+    }
+};
+
+int main() {
+    std::cout << " Teste Guardiao Inventario" << std::endl;
+    
+       Produto pote_chocolate("Pote Chocolate 2L", 15, 100);
+    Produto picole_limao("Picolé de Limão", 50, 100);
+
+    std::cout << "Chocolate precisa repor? " << (pote_chocolate.verificar_necessidade_compra() ? "Sim" : "Nao") << std::endl;
+    std::cout << "Limão precisa repor? " << (picole_limao.verificar_necessidade_compra() ? "Sim" : "Nao") << std::endl;
+
+    std::cout << "\n Teste Blindagem" << std::endl;
+    
+
+    picole_limao.registrar_saida(10); 
+    
+pote_chocolate.registrar_saida(20);
+
+    return 0;
+}

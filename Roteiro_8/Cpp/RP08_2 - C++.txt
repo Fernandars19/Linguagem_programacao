@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+
+class Insumo {
+private:
+
+    std::string nome;
+    int quantidade;
+    int mesValidade;
+
+public:
+
+    Insumo(std::string n, int q, int mes) {
+        nome = n;
+        quantidade = q;
+        mesValidade = 1; 
+        
+             setMesValidade(mes); 
+    }
+
+
+    void setMesValidade(int mes) {
+        if (mes >= 1 && mes <= 12) {
+            mesValidade = mes;
+            std::cout << "Mes de validade do " << nome << " cadastrado: " << mesValidade << std::endl;
+        } else {
+           
+            std::cout << "ERRO DE DIGITACAO: Mes " << mes << " e invalido para o " << nome << std::endl;
+        }
+    }
+
+   
+    bool estaValido(int mesAtual) {
+        if (mesValidade < mesAtual) {
+                       std::cout << "ALERTA: Produto Vencido: " << nome << std::endl;
+            return false;
+        }
+        std::cout << "OK: " << nome << " esta dentro da validade." << std::endl;
+        return true;
+    }
+};
+
+int main() {
+    std::cout << "Desafio Amendoin Murcho" << std::endl;
+
+
+    std::cout << "\nTestando cadastro com erro de digitacao:" << std::endl;
+    Insumo amendoim_erro("Amendoim", 5, 15); 
+
+
+    std::cout << "\nTestando cadastro correto:" << std::endl;
+    Insumo leite_condensado("Leite Condensado", 10, 8); 
+
+       std::cout << "\nVerificando validades (Supondo que estamos no mes 10):" << std::endl;
+    
+
+    leite_condensado.estaValido(10); 
+    
+
+    Insumo cobertura("Cobertura de Chocolate", 5, 12);
+    cobertura.estaValido(10); 
+
+    return 0;
+}
