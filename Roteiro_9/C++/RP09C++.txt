@@ -1,0 +1,70 @@
+RP09 - C++
+#include <iostream>
+#include <string>
+#include <fstream> 
+
+class Produto {
+private:
+    
+    std::string nome;
+    int estoque_real;
+    int estoque_ideal;
+
+public:
+    // valores iniciais dos produtos
+    Produto(std::string n, int real, int ideal) {
+        nome = n;
+        estoque_real = real;
+        estoque_ideal = ideal;
+    }
+
+    // vender e atualizar
+    void registrar_saida(int quantidade) {
+        if (quantidade <= estoque_real) {
+            estoque_real -= quantidade;
+            std::cout << "Venda de " << nome << " anotada! Saldo: " << estoque_real << "\n";
+        } else {
+            std::cout << "Bloqueado! O Dener nao tem " << quantidade << " de " << nome << " no freezer.\n";
+        }
+    }
+
+    // salvar o estado atual do objeto em um arquivo de texto
+    void salvar_no_arquivo() {
+
+        std::ofstream arquivo("estoque_dener.txt", std::ios::app);
+
+        if (arquivo.is_open()) {
+
+            arquivo << nome << "," << estoque_real << "," << estoque_ideal << "\n";
+            
+            std::cout << "Sucesso! O estoque de " << nome << " foi salvo no cofre digital.\n";
+            
+            arquivo.close();
+        } else {
+
+            std::cout << "ERRO, nao conseguimos abrir o arquivo para salvar o " << nome << ".\n";
+        }
+    }
+};
+
+int main() {
+    std::cout << "--- SISTEMA DA SORVETERIA: SALVANDO O DIA (E OS DADOS) ---" << std::endl;
+
+    // 1. Criando os produtos na memória 
+    Produto chocolate("Pote Chocolate 2L", 15, 100);
+    Produto limao("Picole de Limao", 50, 100);
+
+    // 2. Simulando 
+    chocolate.registrar_saida(2);
+    limao.registrar_saida(10);
+
+    std::cout << "\n--- FECHANDO O CAIXA E SALVANDO NO COMPUTADOR ---" << std::endl;
+
+    // 3. Chamando a persistência
+    
+    chocolate.salvar_no_arquivo();
+    limao.salvar_no_arquivo();
+
+    return 0;
+}Pote Chocolate 2L,13,100
+Picole de Limao,40,100
