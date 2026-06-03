@@ -1,0 +1,94 @@
+RP07 - C++
+#include <iostream>
+
+#include <string>
+
+
+
+class Aluno {
+
+private: 
+
+
+
+    std::string nome;
+
+    int idade;
+
+    float nota;
+
+
+
+public:
+
+
+
+    Aluno(std::string n, int i, float nt) {
+
+        nome = n;
+
+        idade = i;
+
+        nota = nt;
+
+    }
+
+
+
+    void estudar() {
+
+        std::cout << nome << " esta estudando" << std::endl;
+
+    }
+
+
+
+    void fazer_prova() {
+
+        std::cout << nome << " esta fazendo prova" << std::endl;
+
+    }
+
+
+
+    void colar() {
+
+        std::cout << "Atençao: " << nome << " esta colando forte" << std::endl;
+
+    }
+
+};
+
+
+
+int main() {
+
+  
+
+    
+
+    Aluno aluno1("Julia", 20, 9.5);
+
+    Aluno aluno2("Fernanda", 22, 6.0);
+
+    Aluno aluno3("Emily", 19, 4.5);
+
+
+
+
+
+    std::cout << " Faculdade Core: " << std::endl;
+
+    
+
+    aluno1.fazer_prova(); 
+
+    aluno2.estudar();     
+
+    aluno3.colar();       
+
+
+
+    return 0;
+
+}
